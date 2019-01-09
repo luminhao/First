@@ -1,0 +1,45 @@
+#server: 
+#    
+#    port: 8080
+#    servlet:
+#      path: /BK-QT
+#      
+spring:
+  #数据源配置
+  datasource:  
+    url: jdbc:mysql:///blog
+    username: root
+    password: 123
+    driver-class-name: com.mysql.jdbc.Driver
+  servlet:   
+    multipart:
+      max-file-size: 100mb 
+      max-request-size: 100Mb
+  #两个项目报错来自
+  jmx:
+    enabled: false    
+      
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode:  LEGACYHTML5
+    
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  typeAliasesPackage: com.bk.entity
+  global-config:
+    db-config:
+      id-type: id-worker
+      
+pagehelper:  
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  rowBoundsWithCount: true
+      
+
+
+
+

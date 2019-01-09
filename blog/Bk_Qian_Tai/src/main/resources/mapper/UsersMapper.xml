@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bk.dao.UserMapper">	
+	<!--用户登录  -->
+	<select id="login" resultType="users">
+	select * from users where uname=#{username} and pwd=#{password}
+	</select>
+	<!-- 模糊查询用户 -->
+	<select id="serarch_username" resultType="users">
+		SELECT * FROM users WHERE uname LIKE '%#{uname}%'
+	</select>
+	<update id="update">
+		update users set uname=#{uname},pwd=#{pwd},nickname=#{nickname},email=#{email}
+		<if test="image!=null and image!=''">,image=#{image}</if>
+		where uid=#{uid}
+	</update>
+	<!--用户最后一次登录  -->	 
+	<update id="lastlogin">
+		UPDATE users SET logdate=#{logdate} WHERE uid=#{uid}
+	</update>
+</mapper>

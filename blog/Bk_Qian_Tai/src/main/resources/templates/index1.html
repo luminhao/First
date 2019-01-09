@@ -1,0 +1,122 @@
+	
+ <!DOCTYPE html >
+<!-- saved from url=(0033)https://demo.typecho.me/affinity/ -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	 <title>喜马拉雅（中国）博客	</title> <link rel="stylesheet" href="./树莓派 - 凤七的树莓派博客_files/style.css"> 
+	 <meta name="description" content="凤七的树莓派博客"> <meta name="keywords" content="凤七"> 
+	 <meta name="generator" content="Typecho 1.1/17.10.30"> <meta name="template" content="Affinity"> 
+	 <link rel="pingback" href="https://demo.typecho.me/affinity/action/xmlrpc"> 
+	 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://demo.typecho.me/affinity/action/xmlrpc?rsd"> 
+	 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://demo.typecho.me/affinity/action/xmlrpc?wlw">
+	  <link rel="alternate" type="application/rss+xml" title="树莓派 » RSS 2.0" href="https://demo.typecho.me/affinity/feed/"> 
+	  <link rel="alternate" type="application/rdf+xml" title="树莓派 » RSS 1.0" href="https://demo.typecho.me/affinity/feed/rss/"> 
+	  <link rel="alternate" type="application/atom+xml" title="树莓派 » ATOM 1.0" href="https://demo.typecho.me/affinity/feed/atom/">
+	   <link href="./树莓派 - 凤七的树莓派博客_files/xcode.min.css" rel="stylesheet">
+  <link href="./树莓派 - 凤七的树莓派博客_files/style.min.css" rel="stylesheet">
+
+  <style type="text/css">
+  	#zz:hover{
+  		color: #e10d58;
+  	}
+  	#zz{
+  		color:#333;
+  	}
+  </style>
+</head> 
+   <body>
+   <!-- 头部 -->
+   <header   id="header" class="header bg-white animated headroom--top headroom--not-bottom"> 
+   		<div class="navbar-container" >
+   		 <a href="#" style="float: left;margin-top: 10px;margin-left: -150px;" >
+   		  <img src="images/logo.png	" width="100px;" alt="LiNPX"> </a>
+   		  <span style="float: left;margin-left:-40px;font-weight: bold;">北大青鸟3181-博客项目作品-公元后2018年10月纪念</span>
+   		   <div class="navbar-menu" style="margin-right: -180px;">
+   		   <a href="https://www.linpx.com/about.html">关于我们</a> 
+   		    <a href="login.action" th:if="${session.user==null}">登录</a>
+   		    <img alt="" th:if="${session.user!=null}" style="border-radius: 50%;border: 2px solid rgba(202, 202, 255, 0.8);display: inline-block;
+				    height: 50px;width: 50px;vertical-align: middle;box-sizing: border-box;max-width: none;" th:src="${session.user!=null?session.user.image:''}" src="">
+				      <a href="user-view"   th:if="${session.user!=null}" th:text="'欢迎您，'+${session.user!=null?session.user.nickname:''}"></a>
+				      <a href="exit-login" th:if="${session.user!=null}">退出登录</a>  		    					    
+   		    </div>
+   		      </div> 
+   </header>
+
+    <!--左选项  -->
+    <section class="section" style="margin-top: 70px;">
+     <section class="section-sidebar">
+      <div class="sidebar-header">
+       <a href="#" class="sidebar-header-logo">
+        <img class="logo" alt="北大青鸟" src="images/affinity.png">
+       </a> <p>博客小组结业项目</p> 
+	       <ul class="nav"> 
+		       <li><a class="current" href="index.action">首页</a></li> 
+		       <li><a href="search-view" title="搜索"> <span class="icon-search"></span> 搜索</a></li>
+		       <li><a href="fenlei-view" title="分类">分类</a></li> 
+		       <li><a href="bk-view" title="写博客">写博客	</a></li> 
+		       
+	        </ul> 
+
+        </div>
+       <div class="sidebar-footer"></div> 
+       </section>
+       
+       <!--内容  -->
+       <section class="section-content" id="content" style="display: none;" role="main">
+       <!-- 博客列表 -->
+        <div class="content-cards" > 
+   			<article class="content-card post" th:each="article:${articles}">
+   			 <div class="card">
+   			  <a th:href="'bk_view?id='+${article.aid}" href="#" class="card-image " th:style="'background-image: url('+${article.aimage}+')'" style="background-image: url(https://img.qianduanmei.com/usr/uploads/2017/07/4106945505.jpg_580x330.jpg)"> </a>
+   			   <header class="card-header">
+   			    <div class="card-title">
+   			     <h1 class="post-title"><a th:href="'bk_view?id='+${article.aid}" th:text="${article.atitle}">数据有问题</a></h1>
+   			    </div>
+   			    </header>
+   			     <section class="card-body">
+   			      <div class="card-body-text" th:utext="${article.acontent}">内容</div>
+   			     </section> 
+   			     <footer class="card-footer">
+   			     
+   			      <time class="post-date" datetime="2017-07-28" th:text="${#dates.format(article.adate, 'yyyy-MM-dd')}" style="color: #333">Jul 28</time>
+   			       · <a th:href="'search_fenlei?tname='+${article.type.tid}" href="" style="color: #3385ff" th:text="${article.type.tname}">默认分类</a>
+   			        <span style="color: #333">· 作者：</span><a th:href="'#'" id="zz" th:text="${article.user.nickname}"  ></a>
+   			        </footer>
+   			   </div>
+   			</article>                 
+         </div>
+                  
+         <nav class="pagination" role="navigation">
+         <a class="next"  th:if="${search==null}"   title="" th:href="'index.action?pageNum='+${pageNum==0?1:pageNum-1}" href="">
+          <x aria-label="Next" class="btn btn-primary">上一页</x></a>&nbsp;&nbsp;
+          <a class="next"    th:if="${search==null}"  title="" th:href="'index.action?pageNum='+${pageNum+1}">
+          <x aria-label="Next" class="btn btn-primary">下一页</x></a>
+          <!-- 搜索分页 -->
+	          <a class="next" th:if="${search!=null}"   title="" th:href="'search?pageNum='+${pageNum==0?1:pageNum-1}+'&title='+${search}" href="">
+	          <x aria-label="Next" class="btn btn-primary">上一页</x></a>&nbsp;&nbsp;
+	          <a class="next" th:if="${search!=null}" title="" th:href="'search?pageNum='+${pageNum+1}+'&title='+${search}">
+	          <x aria-label="Next" class="btn btn-primary">下一页</x></a>
+          </nav> 
+          </section>
+
+
+
+          
+           <section class="section-footer" style="padding: 0px;">
+            <p>
+            <strong><a href="#">喜马拉雅国际集团（中国）有限公司</a></strong></p> 
+            
+             <p>© 2018 All Rights Reserved.Theme Design by <a href="https://github.com/Showfom/Affinity" title="Ghost Theme Affinity">Affinity</a> <span class="text-red">♥</span></p>
+              </section> 
+              </section>   
+		        <script type="text/javascript" src="jquery-1.8.3.js"></script>
+				  <script type="text/javascript">
+				  	$(function(){
+				  		$("#content").fadeIn("3000");
+				  	});
+				  </script> 
+    </body></html>       

@@ -1,0 +1,26 @@
+package com.bk.controller;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.bk.service.BkService;
+import com.bk.service.FenleiService;
+
+@Controller
+public class FenleiController {
+	@Autowired
+	FenleiService service;
+	
+	@RequestMapping("bk-view")
+	public String Alltype(Model model) {
+		model.addAttribute("types", service.Alltype());
+		return "text-edit";
+	}
+}

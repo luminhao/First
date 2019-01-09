@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Apricot 1.3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/loader-style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+
+    <link href="assets/js/footable/css/footable.core.css?v=2-0-1" rel="stylesheet" type="text/css">
+    <link href="assets/js/footable/css/footable.standalone.css" rel="stylesheet" type="text/css">
+    <link href="assets/js/footable/css/footable-demos.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="assets/js/dataTable/lib/jquery.dataTables/css/DT_bootstrap.css">
+    <link rel="stylesheet" href="assets/js/dataTable/css/datatables.responsive.css">
+
+
+
+	<!--分页标签  -->
+	<style type="text/css">
+		#fanye li {
+			float: left;
+			background-color: white;
+			padding-top:5px;
+			padding-left:20px;			
+			font-size: 15px;
+			border: 1px  solid white;		
+			list-style: none;				
+		}
+		#fanye li:hover{
+			color: blue;
+		}
+	</style>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/minus.png">
+</head>
+
+
+<body  style="background-image: none;background-color:wite"> 
+
+
+
+            <div class="content-wrap">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="nest" id="FilteringClose">
+                            <div class="title-alt">
+                                <h6 >
+                                     <span th:text="${session.user.nickname}" style="font-size: 30px;font-weight: bold;color: #d9534f	;"></span>的博客列表</h6>	
+                            </div>
+
+                            <div class="body-nest" id="Filtering">
+<!-- 
+                                <div class="row" style="margin-bottom:10px;">
+                                    <div class="col-sm-4" style="width: 500px;">
+                                        <input class="form-control" style="color: #ccc;display: inline;width: 400px" placeholder="请输入博客标题" type="text">                    
+                                   		  													  <button style="float: left;" class="pull-right btn btn-info clear-filter" >搜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;索</button>
+                                   		                                      
+                                   		
+                                    </div>
+
+                                    <div class="col-sm-6">
+
+                                    </div>
+
+                                </div>
+ -->
+                                <table id="footable-res2" class="demo" data-filter="#filter" data-filter-text-only="true">
+                                    <thead>
+                                        <tr>
+                                            <th data-toggle="true">
+                                             	   博客标题
+                                            </th>
+                                            <th>
+                                                	作者
+                                            </th>
+                                            <th>内容</th>
+                                            <th >
+                                                	发布时间
+                                            </th>                                            
+                                            <th data-hide="phone">
+                                                	状态
+                                            </th>
+                                            <th style="width: 160px">
+                                                	操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="article:${articles}">
+                                            <td	  style="color: #5bc0de;font-size: 20px;max-width: 110px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><a th:text="${article.atitle}" style="cursor: pointer;"  th:onclick="|javascript:window.parent.location.href='bk_view?id=${article.aid}'	|"></a></td>
+                                            <td th:text="${article.user.nickname}">
+                                            </td>
+                                            <td th:text="${article.acontent}" style="max-width: 110px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">黄总于今日准备草案	</td>
+                                            <td th:text="${#dates.format(article.adate, 'yyyy-MM-dd')}">2088/8/8</td>
+                                            <td data-value="1">
+                                                <span class="status-metro status-active" th:if="${article.examine==1}" title="审核通过">审核通过</span>
+                                                <span class="status-metro status-suspended" th:if="${article.examine==2}" title="审核未通过">审核未通过</span>
+                                                <span class="status-metro status-disabled" th:if="${article.examine==0}" title="待审核">待审核</span>
+                                            </td>
+                                            
+                                            <td>
+<!--                                            		 <button type="button" class="btn btn-default">
+                                   				 <span class="entypo-pencil" ></span>&nbsp;&nbsp;编辑</button> -->
+                                   				 
+				                                 <button type="button" class="btn btn-danger" th:onclick="|del('${article.aid}','${article.atitle}')|">
+				                                 <span class="entypo-cancel-squared" ></span>&nbsp;&nbsp;删除</button>
+                            				 
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>     
+                                                                   
+<!--                                     <tfoot >
+                                        <tr>
+                                            <td colspan="6" >
+                                                <div id="fanye">
+                                                <ul style="float: right">
+                                                	<li ><a data-page="first" th:href="'search-userid?pageNum='+${pageNum==1?1:pageNum-1}">[上一页]</a></li>                                                	
+                                                	
+                                                	<li ><a  th:href="'search-userid?pageNum='+	${pageNum+1}">[下一页]</a></li>
+													
+                                                </ul></div>
+                                            </td>
+                                        </tr>
+                                    </tfoot> -->
+                                    
+                                </table>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+    <!-- MAIN EFFECT -->
+    <script type="text/javascript" src="assets/js/preloader.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/load.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+
+
+
+
+
+
+
+
+    <!-- /MAIN EFFECT -->
+    <!-- GAGE -->
+    <script type="text/javascript" src="assets/js/toggle_close.js"></script>
+    <script src="assets/js/footable/js/footable.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.sort.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.filter.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
+    <script src="assets/js/footable/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
+    <script type="text/javascript">
+    	function del(id,title){
+    		var p=confirm('是否删除:'+title);
+    		if(p){
+    			$.post("del-article",{aid:id},function(data){
+    				if(data=='ok'){
+    					alert('删除成功啦');
+    					window.location.reload();
+    				}  				
+    			});
+    		}
+    	}
+    $(function() {
+        $('.footable-res').footable();
+    });
+    </script>
+    <script type="text/javascript">
+    
+    $(function() {
+        $('#footable-res2').footable().bind('footable_filtering', function(e) {
+            var selected = $('.filter-status').find(':selected').text();
+            if (selected && selected.length > 0) {
+                e.filter += (e.filter && e.filter.length > 0) ? ' ' + selected : selected;
+                e.clear = !e.filter;
+            }
+        });
+
+        $('.clear-filter').click(function(e) {
+            e.preventDefault();
+            $('.filter-status').val('');
+            $('table.demo').trigger('footable_clear_filter');
+        });
+
+        $('.filter-status').change(function(e) {
+            e.preventDefault();
+            $('table.demo').trigger('footable_filter', {
+                filter: $('#filter').val()
+            });
+        });
+
+        $('.filter-api').click(function(e) {
+            e.preventDefault();
+
+            //get the footable filter object
+            var footableFilter = $('table').data('footable-filter');
+
+            alert('about to filter table by "tech"');
+            //filter by 'tech'
+            footableFilter.filter('tech');
+
+            //clear the filter
+            if (confirm('clear filter now?')) {
+                footableFilter.clearFilter();
+            }
+        });
+    });
+    </script>
+
+</body>
+
+</html>

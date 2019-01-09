@@ -1,0 +1,142 @@
+
+ <!DOCTYPE html>
+<!-- saved from url=(0033)https://demo.typecho.me/affinity/ -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	 <title>喜马拉雅（中国）博客</title> <link rel="stylesheet" href="./树莓派 - 凤七的树莓派博客_files/style.css"> 
+	 <meta name="description" content="凤七的树莓派博客"> <meta name="keywords" content="凤七"> 
+	 <meta name="generator" content="Typecho 1.1/17.10.30"> <meta name="template" content="Affinity"> 
+	 <link rel="pingback" href="https://demo.typecho.me/affinity/action/xmlrpc"> 
+	 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://demo.typecho.me/affinity/action/xmlrpc?rsd"> 
+	 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://demo.typecho.me/affinity/action/xmlrpc?wlw">
+	  <link rel="alternate" type="application/rss+xml" title="树莓派 » RSS 2.0" href="https://demo.typecho.me/affinity/feed/"> 
+	  <link rel="alternate" type="application/rdf+xml" title="树莓派 » RSS 1.0" href="https://demo.typecho.me/affinity/feed/rss/"> 
+	  <link rel="alternate" type="application/atom+xml" title="树莓派 » ATOM 1.0" href="https://demo.typecho.me/affinity/feed/atom/">
+	   <link href="./树莓派 - 凤七的树莓派博客_files/xcode.min.css" rel="stylesheet">	   
+	  <link href="./树莓派 - 凤七的树莓派博客_files/style.min.css" rel="stylesheet"> 
+	 <script type="text/javascript" src="jquery-1.8.3.js"></script>
+	 <script type="text/javascript" src="js/wangEditor.js"></script>
+  	<style type="text/css">
+		            input,select,textarea{border: 1px solid #ccc; 
+		                      padding: 7px 0px;
+		                     border-radius: 3px;
+		                     padding-left:5px; 
+		                    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075); 
+		                    box-shadow: inset 0 1px 1px rgba(0,0,0,.075); 
+		                    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;  
+		                     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; 
+		                     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s 
+		                     }             
+		             input:focus{                     border-color: #66afe9;
+		                              						   outline: 0;
+		                                                      -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6); 
+		                                                                          box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)             }
+	</style>
+	<script th:inline="javascript">
+	    var message = [[${info}]];
+	    if(message=='ok'){
+	    	if(!confirm("发表成功，是否继续添加？")){
+	    		window.location.href='user-view';	    		
+	    	}else {
+	    		window.location.href='bk-view';
+	    	}	    	
+	    }
+	</script>
+</head> 
+   <body>
+
+   <!-- 头部 -->
+   <header   id="header" class="header bg-white animated headroom--top headroom--not-bottom"> 
+   		<div class="navbar-container" >
+   		 <a href="#" style="float: left;margin-top: 10px;margin-left: -150px;" >
+   		  <img src="images/logo.png	" width="100px;" alt="LiNPX"> </a>
+   		  <span style="float: left;margin-left:-40px;font-weight: bold;">北大青鸟3181-博客项目作品-公元后2018年10月纪念</span>
+   		   <div class="navbar-menu" style="margin-right: -180px;">
+   		   <a href="https://www.linpx.com/about.html">关于我们</a> 
+   		    <a href="login.action" th:if="${session.user==null}">登录</a>
+   		    <img alt="" th:if="${session.user!=null}" style="border-radius: 50%;border: 2px solid rgba(202, 202, 255, 0.8);display: inline-block;
+				    height: 50px;width: 50px;vertical-align: middle;box-sizing: border-box;max-width: none;" th:src="${session.user!=null?session.user.image:''}" src="">
+				      <a href="user-view"   th:if="${session.user!=null}" th:text="'欢迎您，'+${session.user!=null?session.user.nickname:''}"></a>
+				      <a href="exit-login" th:if="${session.user!=null}">退出登录</a>  		    					    
+   		    </div>
+   		      </div> 
+   </header>
+    <!--左选项  -->
+    <section class="section" style="margin-top: 70px;">
+     <section class="section-sidebar">
+      <div class="sidebar-header">
+       <a href="https://demo.typecho.me/affinity/" class="sidebar-header-logo">
+        <img class="logo" alt="北大青鸟" src="images/affinity.png">
+       </a> <p>博客小组结业项目</p> 
+	       <ul class="nav"> 
+		       <li><a class="current" href="index.action">首页</a></li> 
+		       <li><a href="search-view" title="搜索"> <span class="icon-search"></span> 搜索</a></li>
+		       <li><a href="fenlei-view" title="分类">分类</a></li> 
+		       <li><a href="bk-view" title="写博客">写博客	</a></li> 
+		       
+	        </ul> 
+
+        </div>
+       <div class="sidebar-footer"></div> 
+       </section>
+       		<!-- 内容 -->
+			<section class="section-content" id="content" role="main">
+			<form action="bk-add" id="sub" enctype="multipart/form-data" method="post">
+				<div style="margin-top: 50px;">
+					请输入标题：<input type="text" th:disabled="${session.user==null}" th:placeholder="${session.user==null}?'记得先登录呦':''" required="required" oninput="setCustomValidity('');" oninvalid="setCustomValidity('请输入您的标题呀，兄的');" name="atitle" style="width: 500px;">
+					<p>请选择类别:&nbsp;&nbsp;&nbsp;<select name="tid" style="width: 200px;">
+							<option th:each="type:${types}"  th:value="${type.tid}" th:text="${type.tname}">测试呀</option>
+					</select></p>
+					<p>封面图片：&nbsp;&nbsp;	&nbsp;<input id="chooseImage" oninput="setCustomValidity('');"	 oninvalid="setCustomValidity('请选择您的封面图片！！');" required type="file" name="file"></p>
+					<p><img id="cropedBigImg" alt="" width="374px" height="180px" src=""></p>
+					<p><textarea rows="10" id="text1" style="display: none; " oninput="setCustomValidity('');" required="required" cols="100" name="acontent" oninvalid="setCustomValidity('内容是肯定要写的哈.......');"></textarea></p>
+					<div id="div1"></div>
+					<p><input type="submit"   required="required" th:disabled="${session.user==null}" th:value="${session.user==null}?'要先登录呦，兄的':'发    表'" value="发    表" style="width: 150px;"></p>
+					<input type="hidden" name="uid" th:value="${session.user==null?'':session.user.uid}">
+				</div>
+				</form>
+ 			</section>
+       			<!--wangeditor编辑器  -->
+			    <script type="text/javascript">
+			        var E = window.wangEditor
+			        var editor = new E('#div1')
+			        var $text1 = $('#text1')
+			        editor.customConfig.onchange = function (html) {
+			            // 监控变化，同步更新到 textarea
+			            $text1.val(html)
+			        }
+			        editor.create()
+			        // 初始化 textarea 的值
+			        $text1.val(editor.txt.html())
+			    </script>
+            <!--点击图片显示  -->
+				    <script type="text/javascript">
+				    $(function(){				    	
+				    	 $('#chooseImage').on('change',function(){
+				    	var filePath = $(this).val(),         //获取到input的value，里面是文件的路径				    	
+				    		fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase(),
+				    		src = window.URL.createObjectURL(this.files[0]); //转成可以在本地预览的格式				    		
+				    	// 检查是否是图片				    	
+				    	if( !fileFormat.match(/.png|.jpg|.jpeg/) ) {
+				    		error_prompt_alert('上传错误,文件格式必须为：png/jpg/jpeg');
+				        	return;  
+				        }			  
+				        $('#cropedBigImg').attr('src',src);
+				});				    
+				    });
+				    </script>
+
+          
+           <section class="section-footer" style="padding: 0px;">
+            <p>
+            <strong><a href="#">喜马拉雅国际集团（中国）有限公司</a></strong></p> 
+            
+             <p>© 2018 All Rights Reserved.Theme Design by <a href="https://github.com/Showfom/Affinity" title="Ghost Theme Affinity">Affinity</a> <span class="text-red">♥</span></p>
+              </section> 
+              </section>  
+    
+    </body></html>

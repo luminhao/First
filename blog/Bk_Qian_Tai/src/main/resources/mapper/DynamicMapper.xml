@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bk.dao.DynamicMapper">	
+	<select id="byuidselect" resultMap="map">
+		select * from dynamic d
+		left join users u on d.dcuid=u.uid
+		where duid=#{uid}
+		order by ddate desc
+	</select>
+	<resultMap autoMapping="true" type="dynamic" id="map">
+		<id column="did" property="did"/>
+		<association autoMapping="true" property="dcuser" column="dcuid"  javaType="users">	
+			<id column="dcuid" property="uid"/>		
+		</association>
+	</resultMap>
+</mapper>

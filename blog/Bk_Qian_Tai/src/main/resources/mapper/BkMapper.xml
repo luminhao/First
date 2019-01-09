@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bk.dao.BkMapper">	
+
+	<select id="AllArticle" resultMap="articlemap">
+		SELECT * FROM article a
+		LEFT JOIN `type` t ON a.tid=t.tid 
+		LEFT JOIN users u ON u.uid=a.uid
+		where a.examine=1
+		ORDER BY adate desc
+	</select>
+	<resultMap autoMapping="true" type="article" id="articlemap">
+		<id column="aid" property="aid"/>
+		<association autoMapping="true" property="type" column="tid"  javaType="type">	
+			<id column="tid" property="tid"/>		
+		</association>
+		<association autoMapping="true" property="user" column="uid"  javaType="users">	
+			<id column="uid" property="uid"/>		
+		</association>
+	</resultMap>
+
+<!-- 查询单个博客 -->
+	<resultMap autoMapping="true" type="article" id="article">
+		<id column="aid" property="aid"/>
+		<association autoMapping="true" property="type" column="tid"  javaType="type">	
+			<id column="tid" property="tid"/>		
+		</association>
+		<association autoMapping="true" property="user" column="a_uid"  javaType="users">	
+			<id column="a_uid" property="uid"/>	
+			<result column="anickname" property="nickname"/>	
+		</association>
+		<collection autoMapping="true" property="contents" ofType="content">
+			<id column="cid" property="cid"/>
+				<association autoMapping="true" property="user" column="uid"  javaType="users">	
+				<!-- uid 重复，别名区分 -->
+					<id column="c_uid" property="uid"/>		
+				</association>
+		</collection>
+		
+	</resultMap>	
+	<select id="byArticleId" resultMap="article">
+		SELECT *,c.uid AS c_uid,a.uid AS a_uid,
+		(SELECT nickname anickname FROM users WHERE uid=a.uid) AS anickname,
+		(SELECT COUNT(1)  FROM reply WHERE rcid=cid)AS replycount
+		 FROM article a
+		LEFT JOIN `type` t ON a.tid=t.tid 
+		LEFT JOIN content c ON a.aid=c.aid 
+		LEFT JOIN users u ON u.uid=c.uid	
+		WHERE a.aid=#{aid}
+		ORDER BY cdate DESC
+	</select>
+	<!--三条件搜索  -->
+		<select id="byArticleTitle" resultMap="articlemap">
+		SELECT *,c.uid AS c_uid FROM article a
+		LEFT JOIN `type` t ON a.tid=t.tid 
+		LEFT JOIN content c ON a.aid=c.aid 
+		LEFT JOIN users u ON u.uid=a.uid	
+			<where>
+				<if test="title!=null and title!=''">a.atitle like CONCAT('%','${title}','%') and  a.examine=1							
+				</if>
+				<if test="tid!=null and tid!=''">t.tid=#{tid} and a.examine=1</if>
+				<if  test="uid!=null and uid!=''">a.uid=#{uid}</if>
+			</where>			 
+		ORDER BY adate desc
+	</select>
+	<!--查询分类数据  -->
+	<select id="selectFenlei" resultMap="fenlei">
+		select * from type t,article a,users u
+		where a.tid=t.tid and a.uid=u.uid and
+		 a.examine=1		
+	</select>
+	<resultMap autoMapping="true" type="type" id="fenlei">
+		<id column="tid" property="tid"/>
+		<collection property="articles" autoMapping="true" ofType="article">
+			<id column="aid" property="aid"/>
+				<association autoMapping="true" property="user" column="uid"  javaType="users">	
+					<id column="uid" property="uid"/>		
+				</association>
+		</collection> 
+	</resultMap>
+	<!-- 删除博客 -->
+	<delete id="del_article">
+		DELETE article,content FROM article 
+		LEFT JOIN content ON article.aid=content.aid WHERE article.aid=#{aid}
+	</delete>
+</mapper>
